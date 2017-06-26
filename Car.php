@@ -6,9 +6,9 @@ class Car
     private $price;
     private $miles;
 
-    function worthBuying($max_price)
+    function worthBuying($max_price, $max_miles)
     {
-        return $this->price < ($max_price + 100);
+        return ($this->price < ($max_price + 100) && $this->miles < $max_miles);
     }
 
     function __construct($make_model, $image_path, $price, $miles)
@@ -81,10 +81,11 @@ $cars = array($porsche, $ford, $lexus, $mercedes);
 
 $cars_matching_search = array();
 foreach ($cars as $car) {
-    if ($car->worthBuying($_GET["price"])) {
+    if ($car->worthBuying($_GET["price"], $_GET["mileage"])) {
         array_push($cars_matching_search, $car);
     }
 }
+
 ?>
 
 <!DOCTYPE html>
