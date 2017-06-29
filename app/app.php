@@ -28,7 +28,7 @@
     // $lexus->save();
     // $mercedes->save();
 
-    $app->get("/vehicular_view", function() use ($app) {
+    $app->post("/vehicular_view", function() use ($app) {
         // array_push($_SESSION['saved_cars'] ($porsche, $ford, $lexus, $mercedes));
         // foreach ($cars_arr as $car) {
         //     $car->save();
@@ -40,7 +40,7 @@
 
         $cars_matching_search = array();
         foreach ($cars as $car) {
-            if ($car->worthBuying($_GET["price"])){
+            if ($car->worthBuying($_POST["price"])){
             array_push($cars_matching_search, $car);
             }
         }
@@ -65,5 +65,12 @@
             return $soln;
         }
     });
+
+    $app->post("/sell_car", function() use ($app) {
+        $new_car = new Car($_POST['make-model'], $_POST['mileage'],$_POST['price'],$_POST['image']);
+        $new_car->save();
+        return $app["twig"]->render("new_car.html.twig", array("new_car" => $new_car));
+    });
+
     return $app;
 ?>
