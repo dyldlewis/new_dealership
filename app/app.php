@@ -3,9 +3,18 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Car.php";
 
+    session_start();
+
+    if(empty($_SESSION['saved_cars'])) {
+      $_SESSION['saved_cars'] = array();
+    }
+
     $app = new Silex\Application();
 
-    $app->get("/", function() {
+    $app->register(new Silex\Provider\TwigServiceProvider(), array("twig.path" => __DIR__."/../views"
+    ));
+
+    $app->get("/", function() use ($app) {
         return $app["twig"]->render("car_form.html.twig", array("cars" => Car::getAll()));
     });
 
