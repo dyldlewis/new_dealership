@@ -18,16 +18,6 @@
         return $app["twig"]->render("car_form.html.twig");
     });
 
-    // $porsche = new Car("2014 Porsche 911", 114991.00, 7864, "/../img/porsche.jpg");
-    // $ford = new Car("2011 Ford F450", 55995.00, 14241, "/../img/ford.jpg");
-    // $lexus = new Car("2013 Lexus RX 350", 44700.00, 20000, "/../img/lexus.jpg");
-    // $mercedes = new Car("Mercedes Benz CLS550", 39900.00, 37979, "/../img/mercedes.jpg");
-    //
-    // $porsche->save();
-    // $ford->save();
-    // $lexus->save();
-    // $mercedes->save();
-
     $app->post("/vehicular_view", function() use ($app) {
         $cars = Car::getAll();
 
@@ -37,21 +27,10 @@
             array_push($cars_matching_search, $car);
             }
         }
-        return $app["twig"]->render("display_cars.html.twig", array("car_array" => $cars));
+        return $app["twig"]->render("display_cars.html.twig", array("car_array" => $cars_matching_search));
     });
 
     $app->post("/sell_car", function() use ($app) {
-        // $targetfolder = "img/";
-        //     $targetfolder = $targetfolder . basename( $_FILES['image']['name']) ;
-        //     var_dump($targetfolder);
-        //     if(move_uploaded_file($_FILES['image']['tmp_name'], $targetfolder))
-        //      {
-        //      echo "The file ". basename( $_FILES['image']['name']). " is uploaded";
-        //      }
-        //      else {
-        //      echo "Problem uploading file";
-        //  };
-
         $new_car = new Car($_POST['make-model'], $_POST['mileage'], $_POST['price'], $_POST['image']);
         $new_car->save();
         return $app["twig"]->render("new_car.html.twig", array("new_car" => $new_car));
