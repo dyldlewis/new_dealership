@@ -4,8 +4,29 @@
     <title>Cars for Sale</title>
 </head>
 <body>
-    <div class='container'>
-        {{ cars }}
-    </div>
+    <h1>Cars for Sale</h1>
+    {% if car_array is empty %}
+        <h2> No cars matched your search. </h2>
+    {% else %}
+        <!-- $soln = "" -->
+        {% for car in car_array %}
+            <!-- $car_model = $car->getMakeModel();
+            $car_price = $car->getPrice();
+            $car_miles = $car->getMiles();
+            $car_img = $car->getImage(); -->
+            <!-- $soln = $soln . -->
+            <ul class="list-unstyled">
+                <li>{{ car.getMakeModel }}</li>
+                <ul>
+                    <li>{{ car.getMiles }}</li>
+                    <li>{{ car.getPrice }}</li>
+                    <li><img src='{{ car.getImage }}'> </li>
+                </ul>
+            </ul>
+            {% endfor %}
+    {% endif %}
+    <!-- <div class='container'>
+        {*{ cars }}
+    </div> -->
 </body>
 </html>

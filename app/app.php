@@ -29,14 +29,7 @@
     // $mercedes->save();
 
     $app->post("/vehicular_view", function() use ($app) {
-        // array_push($_SESSION['saved_cars'] ($porsche, $ford, $lexus, $mercedes));
-        // foreach ($cars_arr as $car) {
-        //     $car->save();
-        // }
-        // $porsche->setPrice("100000.00");
         $cars = Car::getAll();
-        // var_dump($cars);
-        // var_dump($_SESSION['saved_cars']);
 
         $cars_matching_search = array();
         foreach ($cars as $car) {
@@ -44,26 +37,7 @@
             array_push($cars_matching_search, $car);
             }
         }
-        if (count($cars_matching_search) == 0) {
-            return '<h2> No cars matched your search. </h2>';
-        } else {
-            $soln = "";
-            foreach ($cars_matching_search as $car) {
-                $car_model = $car->getMakeModel();
-                $car_price = $car->getPrice();
-                $car_miles = $car->getMiles();
-                $car_img = $car->getImage();
-                $soln = $soln . '<ul class="list-unstyled">
-                            <li>' . $car_model . '</li>
-                                <ul>
-                                    <li> $' . $car_price . '</li>
-                                    <li> Miles: ' . $car_miles . '</li>
-                                    <li> <img src=' . $car_img . '>  </li>
-                                </ul>
-                        </ul>';
-            };
-            return $soln;
-        }
+        return $app["twig"]->render("display_cars.html.twig", array("car_array" => $cars));
     });
 
     $app->post("/sell_car", function() use ($app) {
