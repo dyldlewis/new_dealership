@@ -15,25 +15,29 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return $app["twig"]->render("car_form.html.twig", array("cars" => Car::getAll()));
+        return $app["twig"]->render("car_form.html.twig");
     });
 
+    // $porsche = new Car("2014 Porsche 911", 114991.00, 7864, "/../img/porsche.jpg");
+    // $ford = new Car("2011 Ford F450", 55995.00, 14241, "/../img/ford.jpg");
+    // $lexus = new Car("2013 Lexus RX 350", 44700.00, 20000, "/../img/lexus.jpg");
+    // $mercedes = new Car("Mercedes Benz CLS550", 39900.00, 37979, "/../img/mercedes.jpg");
+    //
+    // $porsche->save();
+    // $ford->save();
+    // $lexus->save();
+    // $mercedes->save();
 
-    $app->get("/vehicular_view", function() {
-        $header = "
-        <!DOCTYPE html><html>
-        <head>
-            <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-            <title>Find a Car</title>
-        </head>
-        <body><div class='container'>";
-        $footer = "</div></body></html>";
-        $porsche = new Car("2014 Porsche 911", 114991.00, 7864, "/../img/porsche.jpg");
-        $ford = new Car("2011 Ford F450", 55995.00, 14241, "/../img/ford.jpg");
-        $lexus = new Car("2013 Lexus RX 350", 44700.00, 20000, "/../img/lexus.jpg");
-        $mercedes = new Car("Mercedes Benz CLS550", 39900.00, 37979, "/../img/mercedes.jpg");
-        $porsche->setPrice("100000.00");
-        $cars = array($porsche, $ford, $lexus, $mercedes);
+    $app->get("/vehicular_view", function() use ($app) {
+        // array_push($_SESSION['saved_cars'] ($porsche, $ford, $lexus, $mercedes));
+        // foreach ($cars_arr as $car) {
+        //     $car->save();
+        // }
+        // $porsche->setPrice("100000.00");
+        $cars = Car::getAll();
+        // var_dump($cars);
+        // var_dump($_SESSION['saved_cars']);
+
         $cars_matching_search = array();
         foreach ($cars as $car) {
             if ($car->worthBuying($_GET["price"])){
@@ -58,7 +62,7 @@
                                 </ul>
                         </ul>';
             };
-            return $header . $soln . $footer;
+            return $soln;
         }
     });
     return $app;

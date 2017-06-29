@@ -43,6 +43,7 @@
         function save()
         {
             array_push($_SESSION['saved_cars'], $this);
+            var_dump($this);
         }
         static function getAll()
         {
@@ -50,7 +51,7 @@
         }
         static function deleteAll()
         {
-            return $_SESSION['saved_pets'] = array();
+            return $_SESSION['saved_cars'] = array();
         }
     }
 ?>
