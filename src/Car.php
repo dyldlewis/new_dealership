@@ -39,5 +39,18 @@
         {
             return $this->price < ($max_price + 100);
         }
+
+        function save()
+        {
+            array_push($_SESSION['saved_cars'], $this);
+        }
+        static function getAll()
+        {
+            return $_SESSION['saved_cars'];
+        }
+        static function deleteAll()
+        {
+            return $_SESSION['saved_pets'] = array();
+        }
     }
 ?>
