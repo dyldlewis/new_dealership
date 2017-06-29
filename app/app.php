@@ -41,7 +41,18 @@
     });
 
     $app->post("/sell_car", function() use ($app) {
-        $new_car = new Car($_POST['make-model'], $_POST['mileage'],$_POST['price'],$_POST['image']);
+        // $targetfolder = "img/";
+        //     $targetfolder = $targetfolder . basename( $_FILES['image']['name']) ;
+        //     var_dump($targetfolder);
+        //     if(move_uploaded_file($_FILES['image']['tmp_name'], $targetfolder))
+        //      {
+        //      echo "The file ". basename( $_FILES['image']['name']). " is uploaded";
+        //      }
+        //      else {
+        //      echo "Problem uploading file";
+        //  };
+
+        $new_car = new Car($_POST['make-model'], $_POST['mileage'], $_POST['price'], $_POST['image']);
         $new_car->save();
         return $app["twig"]->render("new_car.html.twig", array("new_car" => $new_car));
     });

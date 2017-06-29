@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-6">
                 <h1>Sell a Car!</h1>
-                <form action='/sell_car' method="post">
+                <form action='/sell_car' method="post" enctype="multipart/form-data">
                     <div class='form-group'>
                         <label for='make-model'>Enter Make and Model:</label>
                         <input id='make-model' name='make-model' class='form-control' type='text'>
@@ -27,7 +27,7 @@
                         <input id='mileage' name='mileage' class='form-control' type='number'>
                         <label for='price'>Enter List Price:</label>
                         <input id='price' name='price' class='form-control' type='number'>
-                        <label for='image'>Upload Image:</label>
+                        <label for='image'>Enter URL of Car Photo:</label>
                         <input id='image' name='image' class='form-control' type='text'>
                     </div>
                     <button type='submit' class='btn-success'>Submit</button>
